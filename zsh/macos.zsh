@@ -1,8 +1,8 @@
-# @cmd reset_mac - Generate and apply a random MAC address to en0
-reset_mac() {
+# @cmd reset-mac - Generate and apply a random MAC address to en0
+reset-mac() {
   if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     cat <<'EOF'
-Usage: reset_mac
+Usage: reset-mac
 
 Generate a random locally administered MAC address for en0,
 apply it with sudo ifconfig, and cycle Wi-Fi power.

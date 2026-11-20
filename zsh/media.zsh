@@ -186,11 +186,11 @@ EOF
   yt-dlp -c --batch-file /Users/kmccraney/youtube.txt "$@"
 }
 
-# @cmd append_txt_extension - Replace a path extension with .txt
-append_txt_extension() {
+# @cmd append-txt-extension - Replace a path extension with .txt
+append-txt-extension() {
   if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     cat <<'EOF'
-Usage: append_txt_extension <path>
+Usage: append-txt-extension <path>
 
 Replace the input path's extension with .txt and print the result.
 
@@ -222,7 +222,7 @@ EOF
   fi
   local input_file="$1"
   local output_file="$2"
-  [[ -z "$output_file" ]] && output_file=$(append_txt_extension "$input_file")
+  [[ -z "$output_file" ]] && output_file=$(append-txt-extension "$input_file")
   shortcuts run ocr-text -i "$input_file" | pbpaste > "$output_file"
 }
 

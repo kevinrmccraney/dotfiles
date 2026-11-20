@@ -1,3 +1,19 @@
+# @cmd birthdate - Gets the birthdate of a file or directory
+birthdate() {
+  [ "$1" = "--help" ] && { echo "Usage: birthdate <file-or-directory>"; return; }
+
+  if [ -f "$1" ]; then
+    stat -f "%SB" -t "%Y%m%d%H%M" "$1"
+  elif [ -d "$1" ]; then
+    for f in "$1"/*; do
+      [ -f "$f" ] && printf '%s\t%s\n' "$(stat -f "%SB" -t "%Y%m%d%H%M" "$f")" "$f"
+    done
+  else
+    echo "birthdate: file or directory not found: $1" >&2
+    return 1
+  fi
+}
+
 # @cmd copyfiles - Copy matching files into a named subdirectory
 copyfiles() {
   local delete=false
@@ -216,11 +232,11 @@ EOF
 
 # Filter, deduplicate, and split bucket CSV exports.
 
-# @cmd copy_matching_photos - Copy files named in a text list into keep/
-copy_matching_photos() {
+# @cmd copy-matching-photos - Copy files named in a text list into keep/
+copy-matching-photos() {
   if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     cat <<'EOF'
-Usage: copy_matching_photos <text-file> <source-directory>
+Usage: copy-matching-photos <text-file> <source-directory>
 
 Read filenames from the text file and copy matching files from the source
 directory into a keep/ subdirectory.

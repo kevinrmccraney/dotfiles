@@ -94,11 +94,11 @@ EOF
   ' "$file"
 }
 
-# @cmd filter_http - Keep blank lines and unique HTTP URLs from a text file
-filter_http() {
+# @cmd filter-http - Keep blank lines and unique HTTP URLs from a text file
+filter-http() {
   if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     cat <<'EOF'
-Usage: filter_http <input-file>
+Usage: filter-http <input-file>
 
 Write <input-file-without-extension>-filtered.txt containing blank lines
 and unique lines starting with "http". Later duplicate URLs are omitted.
@@ -111,11 +111,11 @@ EOF
   awk '/^\r?$/ || (/^http/ && !seen[$0]++)' "$1" > "${1%.*}-filtered.txt"
 }
 
-# @cmd split_buckets - Run the bucket CSV filter/deduplicate/split script
-split_buckets() {
+# @cmd split-buckets - Run the bucket CSV filter/deduplicate/split script
+split-buckets() {
   if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     cat <<'EOF'
-Usage: split_buckets [script arguments]
+Usage: split-buckets [script arguments]
 
 Run filter_deduplicate_and_split_bucket_csvs.py using python3.
 Pass any supplied arguments directly to the script.
